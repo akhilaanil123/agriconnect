@@ -1,0 +1,85 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Scheme</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'media/h.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Scheme</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="scheme_name">Scheme Name:</label>
+            <input type="text" id="scheme_name" name="schemeName" value="{{ scheme.sname }}" required><br><br>
+
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50">{{ scheme.desc }}</textarea><br><br>
+
+            <label for="eligibility">Eligibility:</label>
+            <input type="text" id="eligibility" name="eligibility" value="{{ scheme.eligibility }}"><br><br>
+
+            <label for="required_docs">Required Documents:</label>
+            <input type="text" id="required_docs" name="requiredDocs" value="{{ scheme.reqdocs }}"><br><br>
+
+            <label for="last_date">Last Date:</label>
+            <input type="date" id="last_date" name="lastDate" value="{{ scheme.lastdate }}"><br><br>
+
+            <button type="submit">Update Scheme</button>
+        </form>
+    </div>
+</body>
+</html>

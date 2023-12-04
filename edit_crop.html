@@ -1,0 +1,91 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Crop</title>
+    <style>
+        body {  margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'media/h.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+        container {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 2px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        textarea {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body> 
+    <div class="container">
+    <h1>Edit Crop Details</h1>
+
+    
+
+    <form method="post" action="{% url 'edit_crop' crop.id %}">
+        {% csrf_token %}
+        <label for="cname">Crop Name:</label>
+        <input type="text" id="cname" name="cname" value="{{ crop.cname }}"><br><br>
+        
+        <label for="desc">Description:</label><br>
+        <textarea id="desc" name="desc" rows="4" cols="50">{{ crop.desc }}</textarea><br><br>
+        
+        <label for="season">Season:</label>
+        <input type="text" id="season" name="season" value="{{ crop.season }}"><br><br>
+        
+        <label for="soildetails">Soil Details:</label><br>
+        <textarea id="soildetails" name="soildetails" rows="4" cols="50">{{ crop.soildetails }}</textarea><br><br>
+        
+        <label for="pesticides">Pesticides:</label>
+        <input type="text" id="pesticides" name="pesticides" value="{{ crop.pesticides }}"><br><br>
+        
+        <input type="submit" value="Update">
+    </form>
+
+</body>
+</html>

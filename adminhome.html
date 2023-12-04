@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Farmer Homepage</title>
+  <style>
+    body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'media/h.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+      }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 80px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 80px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: rgb(6, 6, 6);
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .nav-links a:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Home</h1>
+    <div class="nav-links">
+      <a href="{% url 'userdetails' %}">User details</a>
+      <a href="{% url 'applicationview' %}"> Applications</a>
+      <a href="{% url 'createscheme' %}">Create schemes</a>
+      <a href="{% url 'viewscheme' %}">View schemes</a>
+      <a href="{% url 'addcrops' %}">add crop details</a>
+      <a href="{% url 'viewcrops' %}">view crop  details</a>
+    </div>
+
+  
+
+  <script>
+    // JavaScript for interactivity (if needed)
+    // For instance, to handle clicks on navigation links and show/hide content
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        sections.forEach(section => {
+          section.style.display = 'none';
+          if (section.id === targetId) {
+            section.style.display = 'block';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

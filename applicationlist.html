@@ -1,0 +1,125 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        table{
+  border-collapse: collapse;
+  border-radius: collapse;
+}
+        tr:not(thead tr):hover {
+         background-color: #444;
+        }
+
+        tr {
+  border-bottom: 3px solid #ddd;
+}
+<!--body {-->
+<!--  max-width: max-content;-->
+<!--  margin: auto;-->
+<!--  padding-top: 20px;-->
+<!--}-->
+         body {
+          margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'media/h.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 80px;
+    }
+    h1 {
+      text-align: center;
+      margin-top:80px;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .nav-links a:hover {
+      background-color: #444;
+    }
+
+    </style>
+    <title>View Applications</title>
+</head>
+
+  <script>
+    // JavaScript for interactivity (if needed)
+    // For instance, to handle clicks on navigation links and show/hide content
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        sections.forEach(section => {
+          section.style.display = 'none';
+          if (section.id === targetId) {
+            section.style.display = 'block';
+          }
+        });
+      });
+    });
+  </script>
+ <form method="post" enctype="multipart/form-data">
+     <h1>Review Applications</h1>
+    {% csrf_token %}
+    <table border="1" cellpadding="15" cellspacing="">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Monthly Income</th>
+          <th>Address</th>
+          <th>Aadhar Card</th>
+          <th>Ration Card</th>
+          <th>Status</th>
+            <th> Update Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for applicant in applicants %}
+          <tr>
+            <td>{{ applicant.Applicant_Name }}</td>
+            <td>{{ applicant.monthly_income }}</td>
+            <td>{{ applicant.address }}</td>
+            <td>{% if applicant.aadhar_card %}<img src="{{ applicant.aadhar_card.url }}" alt="Aadhar Card" style="max-width: 100px; max-height: 100px;">{% endif %}</td>
+            <td>{% if applicant.ration_card %}<img src="{{ applicant.ration_card.url }}" alt="Ration Card" style="max-width: 100px; max-height: 100px;">{% endif %}</td>
+            <td>{{ applicant.status }}</td>
+             <td>
+                        <select name="status_{{ applicant.id }}" >
+                            <option value="approved" {% if applicant.status == 'approved' %}selected{% endif %}>Approve</option>
+                            <option value="rejected" {% if applicant.status == 'rejected' %}selected{% endif %}>Reject</option>
+                            <option value="pending" {% if applicant.status == 'pending' %}selected{% endif %}>Keep Pending</option>
+                        </select>
+             </td>
+          </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     <br>
+    <button style="background:#3630a3;color:white;padding: 10px 20px;" type="submit">Save Changes</button>
+  </form>
+</body>
+</html>

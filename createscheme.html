@@ -1,0 +1,112 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scheme Page</title>
+  <style>
+    body {
+      margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'media/h.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    }
+    .container {
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add Scheme</h2>
+    <form action="" method="post">
+      {% csrf_token %} 
+      <div class="form-group">
+        <label for="schemeName">Scheme Name</label>
+        <input type="text" id="schemeName" name="schemeName" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="requiredDocs">Required Documents</label>
+        <textarea id="requiredDocs" name="requiredDocs" rows="4" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="eligibility">Eligibility</label>
+        <textarea id="eligibility" name="eligibility" rows="4" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="lastDate">Last Date</label>
+        <input type="date" id="lastDate" name="lastDate" required>
+      </div>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('schemeForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Retrieve form data
+      const formData = new FormData(this);
+      const formDataJSON = {};
+      formData.forEach((value, key) => {
+        formDataJSON[key] = value;
+      });
+
+      // Display form data (you can modify this part to send data to the server)
+      console.log(formDataJSON);
+      // Here you can perform AJAX request to send form data to the server using fetch or XMLHttpRequest
+      // Example using fetch:
+      /*
+      fetch('/submit-scheme/', {
+        method: 'POST',
+        body: JSON.stringify(formDataJSON),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Handle response from the server
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+      */
+    });
+  </script>
+</body>
+</html>
